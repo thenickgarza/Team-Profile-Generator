@@ -55,7 +55,26 @@ const promptUser = () => {
             }
         },
         {
-
-        }
+            type: 'checkbox',
+            name: 'employeeType',
+            message: 'Please chooose if you would like to add another employee or exit',
+            choices: ['Add Engineer', 'Add Intern', 'Exit']
+        },
+        {
+            type: 'input',
+            name: 'engineerName',
+            message: 'Please enter the engineers name',
+            when: (answers) => answers.choices === 'Add Engineer',
+            validate: engineerNameInput => {
+                if (engineerNameInput) {
+                    return true;
+                } else {
+                    console.log('You need to enter a engineers name to continue!')
+                    return false
+                }
+            }
+        },
     ])
 }
+
+promptUser();

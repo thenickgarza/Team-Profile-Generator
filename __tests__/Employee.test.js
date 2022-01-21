@@ -1,7 +1,7 @@
-const Employee = require('../lib/Employee')
+const Employee = require('../lib/Employee');
 
 test('creates a employee object', () => {
-    const employee = Employee;
+    const employee = new Employee;
 
     expect(employee.name).toEqual(expect.any(String));
     expect(employee.id).toEqual(expect.any(Number));
@@ -9,19 +9,19 @@ test('creates a employee object', () => {
 });
 
 test('gets the name of the employee', () => {
-    const employee = Employee;
+    const employee = new Employee;
 
     expect(employee.getName()).toEqual(expect.any(String));;
 });
 
 test('gets the id of the employee', () => {
-    const employee = Employee;
+    const employee = new Employee;
 
     expect(employee.getId()).toEqual(expect.any(Number));
 });
 
 test('gets the email of the employee', () => {
-    const employee = Employee;
+    const employee = new Employee;
 
     expect(employee.getEmail()).toEqual(expect.any(String));
 });

@@ -67,7 +67,7 @@ const promptUser = () => {
             type: 'input',
             name: 'engineerName',
             message: 'Please enter the engineers name',
-            when: (answers) => answers.employeeType === 'Add Engineer',
+            when: (answers) => { return answers.employeeType === 'Add Engineer' },
             validate: engineerNameInput => {
                 if (engineerNameInput) {
                     return true;

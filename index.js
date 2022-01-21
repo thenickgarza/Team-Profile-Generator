@@ -2,8 +2,11 @@ const inquirer = require('inquirer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
+const Employee = require('./lib/Employee');
 
-const promptUser = () => {
+const teamArray = [];
+
+const managerPrompt = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -57,29 +60,101 @@ const promptUser = () => {
                 }
             }
         },
+]).then(managerData => {
+    const manager = new Manager(managerData.managersName, managerData.managerId, managerData.managerEmail, managerData.managerOffice)
+    console.log(manager);
+    teamArray.push(manager)
+    pickEmployeePrompt();
+})
+}
+
+const pickEmployeePrompt = () => {
+    return inquirer.prompt([
         {
-            type: 'checkbox',
-            name: 'employeeType',
-            message: 'Please chooose if you would like to add another employee or exit',
-            choices: ['Add Engineer', 'Add Intern', 'Exit']
-        },
+            type: 'list',
+            name: 'userOptions',
+            message: 'Please choose a option!',
+            choices: ['Add enginner', 'Add Intern', 'Exit']
+
+        }
+    ]).then(check => {
+        if (check.userOptions === 'Add enginner') {
+            addEnginnerPrompt()
+        } else if (check.userOptions === 'Add Intern') {
+            addInternPrompt()
+        } else if (check.userOptions === 'Exit') {
+            generateHTML();
+        }
+    })
+}
+
+const addEnginnerPrompt = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'engineerName',
-            message: 'Please enter the engineers name',
-            when: (answers) => { return answers.employeeType === 'Add Engineer' },
+            message: 'Please enter the name of the Engineer',
             validate: engineerNameInput => {
                 if (engineerNameInput) {
                     return true;
                 } else {
-                    console.log('You need to enter a engineers name to continue!')
+                    console.log("You need to enter the Engineer's name to continue!")
                     return false
                 }
             }
-        }
-])
+        },
+        {
+            type: 'input',
+            name: 'engineerId',
+            message: 'Please enter the ID of the Engineer',
+            validate : engineerIdInput => {
+                if (engineerIdInput) {
+                    return true
+                } else {
+                    console.log('You need to enter the Engineers ID to continue')
+                    return false
+                }
+            }
+        },
+        {
+            type: 'email',
+            name: 'engineerEmail',
+            message: 'Please enter the email address of the Engineer',
+            validate: engineerEmailInput => {
+                if (engineerEmailInput) {
+                    return true
+                } else {
+                    console.log('You need to enter the email address of the Engineer to continue')
+                    return false
+                }
+            }
+        }, 
+        {
+            type: 'input',
+            name: 'engineerGithub',
+            message: 'Please enter the Github username for the engineer',
+            validate: engineerGithubInput => {
+                if (engineerGithubInput) {
+                    return true
+                } else {
+                    console.log('You need to enter the Github username for the Engineer to continue')
+                    return false;
+                }
+            }
+        },
+    ]).then(engineerData => {
+        const engineer = new Engineer(engineerData.engineerName, engineerData.engineerId, engineerData.engineerEmail, engineerData.engineerGithub)
+        teamArray.push(engineer)
+        console.log(engineer)
+    })
 }
-promptUser()
-.then(data => {
-    console.log(data);
-})
+
+const addInternPrompt = () => {
+    return inquirer.prompt([
+        {
+
+        }
+    ])
+}
+
+managerPrompt()

@@ -1,4 +1,7 @@
 const inquirer = require('inquirer');
+const Intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -64,7 +67,7 @@ const promptUser = () => {
             type: 'input',
             name: 'engineerName',
             message: 'Please enter the engineers name',
-            when: (answers) => answers.choices === 'Add Engineer',
+            when: (input) => input.employeeType === 'Add Engineer',
             validate: engineerNameInput => {
                 if (engineerNameInput) {
                     return true;
@@ -73,8 +76,10 @@ const promptUser = () => {
                     return false
                 }
             }
-        },
-    ])
+        }
+])
 }
-
-promptUser();
+promptUser()
+.then(data => {
+    console.log(data);
+})

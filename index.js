@@ -2,7 +2,8 @@ const inquirer = require('inquirer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Employee = require('./lib/Employee');
+const { writeFile, copyFile, appendFile } = require('./utils/generate-site');
+const { renderManager, renderEngineer, renderIntern, renderBottom} = require('./src/page-template')
 
 const teamArray = [];
 
@@ -64,7 +65,9 @@ const managerPrompt = () => {
     const manager = new Manager(managerData.managersName, managerData.managerId, managerData.managerEmail, managerData.managerOffice)
     console.log(manager);
     teamArray.push(manager)
-    pickEmployeePrompt();
+    const managerHTML = renderManager(manager);
+    console.log(managerHTML)
+    writeFile(managerHTML);
 })
 }
 
@@ -74,7 +77,7 @@ const pickEmployeePrompt = () => {
             type: 'list',
             name: 'userOptions',
             message: 'Please choose a option!',
-            choices: ['Add enginner', 'Add Intern', 'Exit']
+            choices: ['Add enginner', 'Add Intern', 'Build Page']
 
         }
     ]).then(check => {
@@ -82,7 +85,7 @@ const pickEmployeePrompt = () => {
             addEnginnerPrompt()
         } else if (check.userOptions === 'Add Intern') {
             addInternPrompt()
-        } else if (check.userOptions === 'Exit') {
+        } else if (check.userOptions === 'Build Page') {
             generateHTML();
         }
     })
@@ -146,15 +149,76 @@ const addEnginnerPrompt = () => {
         const engineer = new Engineer(engineerData.engineerName, engineerData.engineerId, engineerData.engineerEmail, engineerData.engineerGithub)
         teamArray.push(engineer)
         console.log(engineer)
+        const engineerHTML = renderEngineer(engineer)
+        appendFile(engineerHTML);
     })
 }
 
 const addInternPrompt = () => {
     return inquirer.prompt([
         {
-
+            type: 'input',
+            name: 'internName',
+            messgae: 'Please enter the name of the Intern',
+            validate: internNameInput => {
+                if (internNameInput) {
+                    return true;
+                } else {
+                    console.log("You need to enter a name for the Intern to continue")
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internId',
+            message: `Please enter the Intern's Id`,
+            validate: internIdInput => {
+                if (internIdInput) {
+                    return true
+                } else {
+                    console.log(`Please enter the Intern's Id to continue`)
+                    return false
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internEmail',
+            message: `Please enter the Intern's email address to continue`,
+            validate: internEmailInput => {
+                if (internEmailInput) {
+                    return true
+                } else {
+                    console.log("Please enter the email address for the Intern to continue")
+                    return false
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'internSchool',
+            message: "Please enter the school the Intern went to",
+            validate: internSchoolInput => {
+                if (internSchoolInput) {
+                    return true
+                } else {
+                    console.log(`You need to enter a school for the Intern to continue`)
+                    return false
+                }
+            }
         }
-    ])
+    ]).then(internData => {
+        const intern = new Intern(internData.internName, internData.internId, internData.internEmail, internData.internSchool)
+        teamArray.push(intern)
+        console.log(intern);
+        const internHTML = renderIntern(intern)
+        appendFile(internHTML);
+    })
 }
 
 managerPrompt()
+.then(pickEmployeePrompt)
+.then(appendFile(renderBottom()))
+.then(copyFile());
+

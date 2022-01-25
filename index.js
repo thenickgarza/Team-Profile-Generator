@@ -63,11 +63,12 @@ const managerPrompt = () => {
         },
 ]).then(managerData => {
     const manager = new Manager(managerData.managersName, managerData.managerId, managerData.managerEmail, managerData.managerOffice)
-    console.log(manager);
+    // console.log(manager);
     teamArray.push(manager)
     const managerHTML = renderManager(manager);
     console.log(managerHTML)
     writeFile(managerHTML);
+    pickEmployeePrompt();
 })
 }
 
@@ -148,7 +149,7 @@ const addEnginnerPrompt = () => {
     ]).then(engineerData => {
         const engineer = new Engineer(engineerData.engineerName, engineerData.engineerId, engineerData.engineerEmail, engineerData.engineerGithub)
         teamArray.push(engineer)
-        console.log(engineer)
+        // console.log(engineer)
         const engineerHTML = renderEngineer(engineer)
         appendFile(engineerHTML);
     })
@@ -211,14 +212,10 @@ const addInternPrompt = () => {
     ]).then(internData => {
         const intern = new Intern(internData.internName, internData.internId, internData.internEmail, internData.internSchool)
         teamArray.push(intern)
-        console.log(intern);
+        // console.log(intern);
         const internHTML = renderIntern(intern)
         appendFile(internHTML);
     })
 }
 
-managerPrompt()
-.then(pickEmployeePrompt)
-.then(appendFile(renderBottom()))
-.then(copyFile());
-
+managerPrompt();

@@ -1,4 +1,4 @@
-function renderManager(manager){
+function renderManager(Manager){
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -17,14 +17,14 @@ function renderManager(manager){
             <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">${manager.managersName}</h5>
+                <h5 class="card-title">${Manager.managersName}</h5>
                 <h6 class="card-subtitle"><i class="fas fa-dragon"></i> Manager</h6>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${manager.managerId}</li>
-                    <li class="list-group-item">Email: <a href="mailto: ${manager.managerEmail}">${manager.email}</a></li>
-                    <li class="list-group-item">Office Number: ${manager.managerOffice}</li>
+                    <li class="list-group-item">ID: ${Manager.managerId}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${Manager.managerEmail}">${Manager.email}</a></li>
+                    <li class="list-group-item">Office Number: ${Manager.managerOffice}</li>
                 </ul>
             </div>
         </div>

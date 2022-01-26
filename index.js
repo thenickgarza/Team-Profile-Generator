@@ -66,10 +66,16 @@ const managerPrompt = () => {
     // console.log(manager);
     teamArray.push(manager)
     const managerHTML = renderManager(manager);
-    console.log(managerHTML)
+    // console.log(manager)
+    // console.log(managerHTML)
     writeFile(managerHTML);
     pickEmployeePrompt();
 })
+}
+
+const generateHTML = () => {
+    renderBottom();
+    console.log('Your files have been created! check in the dist folder!')
 }
 
 const pickEmployeePrompt = () => {
@@ -152,6 +158,7 @@ const addEnginnerPrompt = () => {
         // console.log(engineer)
         const engineerHTML = renderEngineer(engineer)
         appendFile(engineerHTML);
+        pickEmployeePrompt();
     })
 }
 
@@ -215,6 +222,7 @@ const addInternPrompt = () => {
         // console.log(intern);
         const internHTML = renderIntern(intern)
         appendFile(internHTML);
+        pickEmployeePrompt();
     })
 }
 

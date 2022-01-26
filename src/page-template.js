@@ -11,20 +11,25 @@ function renderManager(Manager){
         <title>Team Portfolio Generator</title>
     </head>
     <body>
+    <div class="container">
+    <div class="jumbotron">
+    <h1>Team Portfolio Generator</h1>
+    </div>
+    </div>
         <!-- container holding the team members -->
         <main class="container">
             <div class="row">
             <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">${Manager.managersName}</h5>
-                <h6 class="card-subtitle"><i class="fas fa-dragon"></i> Manager</h6>
+                <h5 class="card-title">${Manager.name}</h5>
+                <h6 class="card-subtitle">Manager</h6>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${Manager.managerId}</li>
-                    <li class="list-group-item">Email: <a href="mailto: ${Manager.managerEmail}">${Manager.email}</a></li>
-                    <li class="list-group-item">Office Number: ${Manager.managerOffice}</li>
+                    <li class="list-group-item">ID: ${Manager.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${Manager.email}">${Manager.email}</a></li>
+                    <li class="list-group-item">Office Number: ${Manager.officeNumber}</li>
                 </ul>
             </div>
         </div>
@@ -36,14 +41,14 @@ function renderManager(Manager){
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">${engineer.engineerName}</h5>
-                <h6 class="card-subtitle"><i class="fas fa-chess-knight"></i> Engineer</h6>
+                <h5 class="card-title">${engineer.name}</h5>
+                <h6 class="card-subtitle">Engineer</h6>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${engineer.engineerId}</li>
-                    <li class="list-group-item">Email: <a href="mailto: ${engineer.engineerEmail}">${engineer.engineerEmail}</a></li>
-                    <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.engineerGithub}" target="_blank">${engineer.engineerGithub}</a></li>
+                    <li class="list-group-item">ID: ${engineer.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
                 </ul>
             </div>
         </div>
@@ -56,14 +61,14 @@ function renderManager(Manager){
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">${intern.internName}</h5>
-                <h6 class="card-subtitle"><i class="fas fa-baby"></i> Intern</h6>
+                <h5 class="card-title">${intern.name}</h5>
+                <h6 class="card-subtitle">Intern</h6>
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: ${intern.internId}</li>
-                    <li class="list-group-item">Email: <a href="mailto: ${intern.internEmail}">${intern.internEmail}</a></li>
-                    <li class="list-group-item">School: ${intern.internSchool}</li>
+                    <li class="list-group-item">ID: ${intern.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${intern.email}">${intern.email}</a></li>
+                    <li class="list-group-item">School: ${intern.school}</li>
                 </ul>
             </div>
         </div>
